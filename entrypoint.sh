@@ -1,17 +1,6 @@
 #!/bin/sh -le
 
-function required_arg() {
-  if [ -z "$1" ]; then
-    echo $2
-    exit 1
-  fi
-}
-
-required_arg $1 "`options`"
-
-options=$1
-
-# download sonar-scanner
+OPTIONS=$1
 SONAR_CLI_VERSION=$2
 
 echo "### Download sonar-scanner cli"
@@ -25,4 +14,4 @@ ln -s -f /opt/sonar/scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
 rm -rf /tmp/sonar
 
 echo "### Run sonar-scanner"
-sonar-scanner $options
+sonar-scanner $OPTIONS
