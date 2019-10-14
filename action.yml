@@ -13,7 +13,7 @@ inputs:
     default: '4.2.0.1873'
 runs:
   using: 'docker'
-  main: 'Dockerfile'
+  image: 'Dockerfile'
   args:
     - ${{ inputs.options }}
     - ${{ inputs.version }}
