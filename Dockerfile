@@ -11,4 +11,7 @@ LABEL "maintainer"="Bohdan Vanieiev <warchantua@gmail.com>"
 
 COPY entrypoint.sh /entrypoint.sh
 
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
+    apt-get install -y nodejs
+
 ENTRYPOINT ["/entrypoint.sh"]
