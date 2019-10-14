@@ -16,6 +16,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Run sonarqube
-      uses: ../../
+      uses: ./../../
       with:
         options: "-Dsonar.projectKey='sq1337' -Dsonar.exclusions='**/*.java'"
