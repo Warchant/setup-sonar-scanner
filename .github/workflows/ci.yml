@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run sonarqube
+      uses: ./
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        options: '-Dsonar.login=${{ secrets.SONAR_TOKEN }}
+                  -Dsonar.organization=1corp
+                  -Dsonar.host.url=https://sonarcloud.io/
+                  -Dsonar.projectKey=sonar-scanner-action'

@@ -8,12 +8,12 @@ inputs:
     required: true
   version:
     description: 'Sonar-scanner version'
-    required: false
+    required: true
     # https://github.com/SonarSource/sonar-scanner-cli/releases
-    default: 4.2.0.1873
+    default: '4.2.0.1873'
 runs:
   using: 'docker'
-  main: 'Dockerfile'
+  image: 'Dockerfile'
   args:
     - ${{ inputs.options }}
     - ${{ inputs.version }}
