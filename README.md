@@ -1,12 +1,8 @@
 # sonar-scanner docker action
 
-This action downloads given version of sonar-scanner and executes sonar-scanner analysis with custom options (flags).
+This action downloads given version of sonar-scanner and adds it to PATH.
 
 ## Inputs
-
-### `options`
-
-**Required** a list of options to `sonar-scanner` cli. Default `'-Dsonar.host.url="https://sonarcloud.io"'`
 
 ### `version`
 
