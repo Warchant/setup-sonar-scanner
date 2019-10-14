@@ -11,6 +11,9 @@ inputs:
     required: true
     # https://github.com/SonarSource/sonar-scanner-cli/releases
     default: '4.2.0.1873'
+branding:
+  icon: 'check'
+  color: 'black'
 runs:
   using: 'docker'
   image: 'Dockerfile'
