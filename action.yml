@@ -1,0 +1,19 @@
+name: 'sonar-scanner'
+description: 'Run sonar-scanner on your code'
+author: 'Warchant'
+inputs:
+  options:
+    description: 'Command line optins to sonar-scanner'
+    default: '-Dsonar.host.url="https://sonarcloud.io"'
+    required: true
+  version:
+    description: 'Sonar-scanner version'
+    required: false
+    # https://github.com/SonarSource/sonar-scanner-cli/releases
+    default: 4.2.0.1873
+runs:
+  using: 'docker'
+  main: 'Dockerfile'
+  args:
+    - ${{ inputs.options }}
+    - ${{ inputs.version }}
