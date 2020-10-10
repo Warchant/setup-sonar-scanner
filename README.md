@@ -12,7 +12,7 @@ This action downloads given version of sonar-scanner and adds it to PATH.
 
 ```yaml
 - name: Setup sonarqube
-  uses: warchant/setup-sonar-scanner@v1
+  uses: warchant/setup-sonar-scanner@v3
 - name: Run sonarqube
   env:
     # to get access to secrets.SONAR_TOKEN, provide GITHUB_TOKEN
