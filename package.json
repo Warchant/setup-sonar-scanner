@@ -4,7 +4,8 @@
   "description": "This action downloads given version of sonar-scanner and executes sonar-scanner analysis with custom options (flags).",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "ncc build -o dist index.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,8 @@
   "dependencies": {
     "@actions/core": ">=1.2.6",
     "@actions/tool-cache": "^1.1.2"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.24.0"
   }
 }
