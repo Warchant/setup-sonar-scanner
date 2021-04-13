@@ -1838,6 +1838,9 @@ function extractZipWin(file, dest) {
 function extractZipNix(file, dest) {
     return __awaiter(this, void 0, void 0, function* () {
         const unzipPath = yield io.which('unzip');
+        if (!unzipPath || unzipPath.length == 0) {
+            throw new Error('The unzip program is not available');
+        }
         yield exec_1.exec(`"${unzipPath}"`, [file], { cwd: dest });
     });
 }
