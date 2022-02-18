@@ -6,10 +6,10 @@ inputs:
     description: 'Sonar-scanner version'
     required: true
     # https://github.com/SonarSource/sonar-scanner-cli/releases
-    default: '4.2.0.1873'
+    default: '4.6.2.2472'
 branding:
   icon: 'check'
-  color: 'black'
+  color: 'gray-dark'
 runs:
   using: 'node12'
   main: 'dist/index.js'

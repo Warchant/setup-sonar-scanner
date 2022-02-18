@@ -6,20 +6,26 @@ This action downloads given version of sonar-scanner and adds it to PATH.
 
 ### `version`
 
-**Required** sonar-scanner cli version. List of available versions: https://github.com/SonarSource/sonar-scanner-cli/releases. Default `4.2.0.1873`.
+**Required** sonar-scanner cli version. List of available versions: https://github.com/SonarSource/sonar-scanner-cli/releases. Default `4.6.2.2472`.
 
-## Example usage
+## Full Example usage
 
 ```yaml
-- name: Setup sonarqube
-  uses: warchant/setup-sonar-scanner@v3
-- name: Run sonarqube
-  env:
-    # to get access to secrets.SONAR_TOKEN, provide GITHUB_TOKEN
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  run: sonar-scanner
-       -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-       -Dsonar.organization=1corp
-       -Dsonar.host.url=https://sonarcloud.io/
-       -Dsonar.projectKey=sonar-scanner-action
+on: push
+name: SonarQube
+jobs:
+  sonarQubeTrigger:
+    name: SonarQube Trigger
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Setup sonarqube
+      uses: warchant/setup-sonar-scanner@v3
+    - name: Run sonarqube
+      run: sonar-scanner
+           -Dsonar.organization=1corp 
+           -Dsonar.projectKey=Claro-Club-Mobile 
+           -Dsonar.sources=$GITHUB_WORKSPACE 
+           -Dsonar.host.url=${{ secrets.SONAR_URL }} 
+           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 ```
