@@ -3,25 +3,24 @@ name: CI
 on:
   push:
     branches:
-    - master
+      - master
   pull_request:
     branches:
-    - master
+      - master
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Setup sonarqube
-      uses: ./
-    - name: run sonarqube
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: sonar-scanner
-           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-           -Dsonar.organization=1corp
-           -Dsonar.host.url=https://sonarcloud.io/
-           -Dsonar.projectKey=sonar-scanner-action
+      - uses: actions/checkout@v1
+      - name: Setup sonarqube
+        uses: ./
+      - name: run sonarqube
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: sonar-scanner
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          -Dsonar.organization=1corp
+          -Dsonar.host.url=https://sonarcloud.io/
+          -Dsonar.projectKey=sonar-scanner-action
