@@ -14,7 +14,7 @@ This action downloads given version of sonar-scanner and adds it to PATH.
 on: push
 name: SonarQube Workflow
 jobs:
-  sonarQubeTrigger:
+  sonarqube:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
