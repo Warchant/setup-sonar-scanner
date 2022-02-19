@@ -12,19 +12,17 @@ This action downloads given version of sonar-scanner and adds it to PATH.
 
 ```yaml
 on: push
-name: SonarQube
+name: SonarQube Workflow
 jobs:
   sonarQubeTrigger:
-    name: SonarQube Trigger
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: Setup sonarqube
-      uses: warchant/setup-sonar-scanner@v3
-    - name: Run sonarqube
+    - name: Setup SonarQube
+      uses: diegofcornejo/setup-sonar-scanner@v4
+    - name: SonarQube Scan
       run: sonar-scanner
-           -Dsonar.organization=1corp 
-           -Dsonar.projectKey=Claro-Club-Mobile 
+           -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} 
            -Dsonar.sources=$GITHUB_WORKSPACE 
            -Dsonar.host.url=${{ secrets.SONAR_URL }} 
            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
