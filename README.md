@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
+      with:
+        fetch-depth: 0
     - name: Setup SonarQube
       uses: diegofcornejo/setup-sonar-scanner@v4
     - name: SonarQube Scan
