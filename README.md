@@ -21,11 +21,12 @@ jobs:
       with:
         fetch-depth: 0
     - name: Setup SonarQube
-      uses: diegofcornejo/setup-sonar-scanner@v5.1.0
+      uses: diegofcornejo/setup-sonar-scanner@v5.1.1
     - name: SonarQube Scan
       run: sonar-scanner
-           -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} 
-           -Dsonar.sources=$GITHUB_WORKSPACE 
-           -Dsonar.host.url=${{ secrets.SONAR_URL }} 
+           -Dsonar.host.url=${{ secrets.SONAR_URL }}
            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+           -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+           -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+           -Dsonar.sources=$GITHUB_WORKSPACE 
 ```
