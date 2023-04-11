@@ -6,7 +6,7 @@ This action downloads given version of sonar-scanner and adds it to PATH.
 
 ### `version`
 
-**Required** sonar-scanner cli version. List of available versions: https://github.com/SonarSource/sonar-scanner-cli/releases. Default `4.6.2.2472`.
+**Required** sonar-scanner cli version. List of available versions: https://github.com/SonarSource/sonar-scanner-cli/releases. Default `4.8.0.2856`.
 
 ## Full Example usage
 
@@ -21,7 +21,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: Setup SonarQube
-      uses: diegofcornejo/setup-sonar-scanner@v4
+      uses: diegofcornejo/setup-sonar-scanner@v5.1.0
     - name: SonarQube Scan
       run: sonar-scanner
            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} 
