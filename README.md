@@ -6,26 +6,27 @@ This action downloads given version of sonar-scanner and adds it to PATH.
 
 ### `version`
 
-**Required** sonar-scanner cli version. List of available versions: https://github.com/SonarSource/sonar-scanner-cli/releases. Default `4.6.2.2472`.
+**Required** sonar-scanner cli version. List of available versions: https://github.com/SonarSource/sonar-scanner-cli/releases. Default `4.8.0.2856`.
 
 ## Full Example usage
 
 ```yaml
 on: push
-name: SonarQube
+name: SonarQube Workflow
 jobs:
-  sonarQubeTrigger:
-    name: SonarQube Trigger
+  sonarqube:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: Setup sonarqube
-      uses: warchant/setup-sonar-scanner@v3
-    - name: Run sonarqube
+      with:
+        fetch-depth: 0
+    - name: Setup SonarQube
+      uses: warchant/setup-sonar-scanner@v5
+    - name: SonarQube Scan
       run: sonar-scanner
-           -Dsonar.organization=1corp 
-           -Dsonar.projectKey=Claro-Club-Mobile 
-           -Dsonar.sources=$GITHUB_WORKSPACE 
-           -Dsonar.host.url=${{ secrets.SONAR_URL }} 
+           -Dsonar.host.url=${{ secrets.SONAR_URL }}
            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+           -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+           -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+           -Dsonar.sources=$GITHUB_WORKSPACE
 ```

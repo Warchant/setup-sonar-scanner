@@ -11,16 +11,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v1
-      - name: Setup sonarqube
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+      - name: Setup SonarQube
         uses: ./
-      - name: run sonarqube
+      - name: Sonar Scan
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: sonar-scanner
+          -Dsonar.host.url=${{ secrets.SONAR_URL }}
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-          -Dsonar.organization=1corp
-          -Dsonar.host.url=https://sonarcloud.io/
-          -Dsonar.projectKey=sonar-scanner-action
+          -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+          -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
