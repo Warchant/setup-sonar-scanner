@@ -6,7 +6,7 @@ This action downloads given version of sonar-scanner and adds it to PATH.
 
 ### `version`
 
-**Required** sonar-scanner cli version. List of available versions: https://github.com/SonarSource/sonar-scanner-cli/releases. Default `4.8.0.2856`.
+**Required** sonar-scanner cli version. List of available versions: https://github.com/SonarSource/sonar-scanner-cli/releases. Default `5.0.0.2966`.
 
 ## Full Example usage
 
@@ -20,8 +20,15 @@ jobs:
     - uses: actions/checkout@master
       with:
         fetch-depth: 0
+    # Setup java 17 to be default (sonar-scanner requirement as of 5.x)
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin' # See 'Supported distributions' for available options
+        java-version: '17'
+    # Setup sonar-scanner
     - name: Setup SonarQube
-      uses: warchant/setup-sonar-scanner@v5
+      uses: warchant/setup-sonar-scanner@v6
+    # Run sonar-scanner
     - name: SonarQube Scan
       run: sonar-scanner
            -Dsonar.host.url=${{ secrets.SONAR_URL }}

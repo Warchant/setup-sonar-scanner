@@ -15,8 +15,18 @@ jobs:
       - uses: actions/checkout@master
         with:
           fetch-depth: 0
+
+      # Setup java 17 to be default (sonar-scanner requirement as of 5.x)
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '17'
+
+      # Setup sonar-scanner
       - name: Setup SonarQube
         uses: ./
+
+      # Run scanner
       - name: Sonar Scan
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
