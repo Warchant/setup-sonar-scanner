@@ -6,7 +6,7 @@ This action downloads given version of sonar-scanner and adds it to PATH.
 
 ### `version`
 
-**Required** sonar-scanner cli version. List of available versions: https://github.com/SonarSource/sonar-scanner-cli/releases. Default `5.0.0.2966`.
+**Optional** sonar-scanner cli version. List of available versions: https://github.com/SonarSource/sonar-scanner-cli/releases. Default `5.0.1.3006`.
 
 ## Full Example usage
 

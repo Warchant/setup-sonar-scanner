@@ -6,7 +6,7 @@ inputs:
     description: 'Sonar-scanner version'
     required: true
     # https://github.com/SonarSource/sonar-scanner-cli/releases
-    default: '5.0.0.2966'
+    default: '5.0.1.3006'
 branding:
   icon: 'check'
   color: 'gray-dark'
