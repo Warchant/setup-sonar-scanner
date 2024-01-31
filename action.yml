@@ -11,5 +11,5 @@ branding:
   icon: 'check'
   color: 'gray-dark'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
