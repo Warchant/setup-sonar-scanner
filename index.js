@@ -15,25 +15,32 @@ const getOs = () => {
   }
 }
 
-const makeUrl = (version) => {
-  return `https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${version}-${getOs()}.zip`
+const needArchSuffix = (version) => {
+  const [major, minor] = version.split('.').map(Number);
+  return major > 6 || (major === 6 && minor >= 1);
 }
 
-const makeDirName = (version) => {
-  return `${TOOL_NAME}-${version}-${getOs()}`
+const makeUrl = (version, arch) => {
+  const archSuffix = needArchSuffix(version) ? `-${arch}` : '';
+  return `https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${version}-${getOs()}${archSuffix}.zip`
 }
 
-const download = async (version) => {
-  const url = makeUrl(version);
+const makeDirName = (version, arch) => {
+  const archSuffix = needArchSuffix(version) ? `-${arch}` : '';
+  return `${TOOL_NAME}-${version}-${getOs()}${archSuffix}`
+}
+
+const download = async (version, arch) => {
+  const url = makeUrl(version, arch);
   const toolPath = await tc.downloadTool(url);
   const toolExtractedPath = await tc.extractZip(toolPath);
   const cachedPath = await tc.cacheDir(toolExtractedPath, TOOL_NAME, version);
-  const bin = path.join(cachedPath, makeDirName(version), 'bin');
-  return bin;
+  return path.join(cachedPath, makeDirName(version, arch), 'bin');
 }
 
-const findInCache = (version) => {
-  const dir = tc.find(TOOL_NAME, version);
+const findInCache = (version, arch) => {
+  const archParam = needArchSuffix(version) ? arch : undefined;
+  const dir = tc.find(TOOL_NAME, version, archParam);
   if (dir && dir.length > 0) {
     return dir;
   } else {
@@ -44,9 +51,10 @@ const findInCache = (version) => {
 const run = async () => {
   try {
     const version = core.getInput('version', { required: true });
-    let bin = findInCache(version);
+    const arch = core.getInput('arch', { required: true });
+    let bin = findInCache(version, arch);
     if (!bin) {
-      bin = await download(version);
+      bin = await download(version, arch);
     }
     core.addPath(bin);
   } catch (err) {
