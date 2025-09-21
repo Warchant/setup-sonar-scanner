@@ -7,9 +7,9 @@ inputs:
     required: true
     # https://github.com/SonarSource/sonar-scanner-cli/releases
     default: '5.0.1.3006'
-  version:
+  arch:
     description: 'Sonar-scanner arch'
-    required: true
+    required: false
     # https://github.com/SonarSource/sonar-scanner-cli/releases
     default: 'x64'
 branding:

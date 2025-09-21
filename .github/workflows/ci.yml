@@ -11,6 +11,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        sonar_version: [5.0.2.4997, 6.1.0.4477, 7.2.0.5079]
     steps:
       - uses: actions/checkout@master
         with:
@@ -19,19 +23,14 @@ jobs:
       # Setup java 17 to be default (sonar-scanner requirement as of 5.x)
       - uses: actions/setup-java@v3
         with:
-          distribution: 'temurin' # See 'Supported distributions' for available options
+          distribution: 'temurin'
           java-version: '17'
 
-      # Setup sonar-scanner
+      # Setup sonar-scanner for each matrix version
       - name: Setup SonarQube
         uses: ./
+        with:
+          version: ${{ matrix.sonar_version }}
 
-      # Run scanner
-      - name: Sonar Scan
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: sonar-scanner
-          -Dsonar.host.url=${{ secrets.SONAR_URL }}
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-          -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
-          -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+      - name: Check sonar-scanner version
+        run: sonar-scanner --version
