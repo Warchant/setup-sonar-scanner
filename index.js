@@ -15,6 +15,17 @@ const getOs = () => {
   }
 }
 
+const getArch = () => {
+  switch(process.arch) {
+    case 'x64':
+      return 'x64'
+    case 'arm64':
+      return 'aarch64'
+    default:
+      throw new Error(`Unsupported architecture: ${process.arch}`);
+  }
+}
+
 const needArchSuffix = (version) => {
   const [major, minor] = version.split('.').map(Number);
   return major > 6 || (major === 6 && minor >= 1);
@@ -51,7 +62,7 @@ const findInCache = (version, arch) => {
 const run = async () => {
   try {
     const version = core.getInput('version', { required: true });
-    const arch = core.getInput('arch', { required: true });
+    const arch = core.getInput('arch', { required: false }) || getArch();
     let bin = findInCache(version, arch);
     if (!bin) {
       bin = await download(version, arch);
