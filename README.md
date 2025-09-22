@@ -6,7 +6,12 @@ This action downloads given version of sonar-scanner and adds it to PATH.
 
 ### `version`
 
-**Optional** sonar-scanner cli version. List of available versions: https://github.com/SonarSource/sonar-scanner-cli/releases. Default `5.0.1.3006`.
+**Optional** sonar-scanner cli version. List of available versions: https://github.com/SonarSource/sonar-scanner-cli/releases. Default `7.2.0.5079`.
+
+### `arch`
+
+**Optional** since sonar-scanner-cli 6.1 distributions contain architecture - `x64` or `aarch64`. Default is automatically detected from a runner.
+
 
 ## Full Example usage
 
@@ -27,7 +32,10 @@ jobs:
         java-version: '17'
     # Setup sonar-scanner
     - name: Setup SonarQube
-      uses: warchant/setup-sonar-scanner@v7
+      uses: warchant/setup-sonar-scanner@v8
+      with:
+        version: 7.2.0.5079
+
     # Run sonar-scanner
     - name: SonarQube Scan
       run: sonar-scanner

@@ -6,7 +6,7 @@ inputs:
     description: 'Sonar-scanner version'
     required: true
     # https://github.com/SonarSource/sonar-scanner-cli/releases
-    default: '5.0.1.3006'
+    default: '7.2.0.5079'
   arch:
     description: 'Sonar-scanner arch'
     required: false
