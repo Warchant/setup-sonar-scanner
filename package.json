@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/Warchant/setup-sonarqube#readme",
   "dependencies": {
-    "@actions/core": ">=1.11.1",
+    "@actions/core": ">=3.0.1",
     "@actions/tool-cache": "^2.0.2"
   },
   "devDependencies": {
